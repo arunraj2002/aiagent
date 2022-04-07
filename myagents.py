@@ -1,3 +1,4 @@
+
 import random
 
 class Thing:
@@ -31,7 +32,6 @@ class Agent(Thing):
 
 def TableDrivenAgentProgram(table):
     """
-    [Figure 2.7]
     This agent selects an action based on the percept sequence.
     It is practical only for tiny domains.
     To customize it, provide as table a dictionary of all
@@ -169,8 +169,7 @@ class TrivialVacuumEnvironment(Environment):
     def execute_action(self, agent, action):
         """Change agent's location and/or location's status; track performance.
         Score 10 for each dirt cleaned; -1 for each move."""
-
-       if action=='Right':
+        if action=='Right':
             agent.location = loc_B
             agent.performance -=1
         elif action=='Left':
@@ -180,7 +179,6 @@ class TrivialVacuumEnvironment(Environment):
             if self.status[agent.location]=='Dirty':
                 agent.performance+=10
             self.status[agent.location]='Clean'
-
 
     def default_location(self, thing):
         """Agents start in either location at random."""
