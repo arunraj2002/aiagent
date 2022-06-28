@@ -2,9 +2,7 @@
 ## DATE:04.04.2022
 # <p align="center">Developing AI Agent with PEAS Description
 
-
 ## AIM
-
 To find the PEAS description for the given AI problem and develop an AI agent.
 
 ## THEORY
@@ -18,8 +16,6 @@ A vacuum-cleaner world with just two locations.
 | Agent Type  | Performance Measure | Environment  | Actuators | Sensors |
 | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
 | Vaccum-Cleaner  | Cleanliness, Number of Movements  | Rooms  | Wheels, suction tool  | Location, Cleanliness |
-
-
 
 ## DESIGN STEPS
 ### STEP 1:
@@ -48,21 +44,16 @@ class Thing:
     """
         This represents any physical object that can appear in an Environment.
     """
-
     def is_alive(self):
         """Things that are 'alive' should return true."""
         return hasattr(self, 'alive') and self.alive
-
     def show_state(self):
         """Display the agent's internal state. Subclasses should override."""
         print("I don't know how to show_state.")
-
-
 class Agent(Thing):
     """
         An Agent is a subclass of Thing
     """
-
     def __init__(self, program=None):
         self.alive = True
         self.performance = 0
@@ -72,7 +63,7 @@ class Agent(Thing):
         """Return True if this agent can grab this thing.
         Override for appropriate subclasses of Agent and Thing."""
         return False
-
+        
 def TableDrivenAgentProgram(table):
     """
     This agent selects an action based on the percept sequence.
@@ -88,7 +79,6 @@ def TableDrivenAgentProgram(table):
         return action
 
     return program
-
 loc_A, loc_B, loc_C, loc_D, loc_E, loc_F, loc_G, loc_H, loc_I = (0,0), (0,1), (0,2), (1,2), (1,1), (1,0), (2,0), (2,1), (2,2) # The two locations for the Vacuum world
 #G-20 H-21 I-22
 #F-10 E-11 D-12
@@ -119,7 +109,6 @@ def TableDrivenVacuumAgent():
     }
     return Agent(TableDrivenAgentProgram(table))
 #right1,2,3,4 start left1,2 up1,2
-
 class Environment:
     """Abstract class representing an Environment. 'Real' Environment classes
     inherit from this. Your Environment will typically need to implement:
@@ -199,8 +188,7 @@ class Environment:
             print("  from list: {}".format([(thing, thing.location) for thing in self.things]))
         if thing in self.agents:
             self.agents.remove(thing)
-
-
+            
 class TrivialVacuumEnvironment(Environment):
     """This environment has two locations, A and B. Each can be Dirty
     or Clean. The agent perceives its location and the location's
@@ -265,7 +253,6 @@ class TrivialVacuumEnvironment(Environment):
         """Agents start in either location at random."""
         return random.choice([loc_A, loc_B, loc_C, loc_D, loc_E, loc_F, loc_G, loc_H, loc_I])
 
-
 if __name__ == "__main__":
     agent = TableDrivenVacuumAgent()
     environment = TrivialVacuumEnvironment()
@@ -279,9 +266,7 @@ if __name__ == "__main__":
 ```
 
 ## OUTPUT
-
 ![Screenshot 2022-04-07 203130](https://user-images.githubusercontent.com/75235488/162230133-ff838ebc-ed93-4882-b2c0-3967723b8c09.png)
-
 
 ## RESULT
 
