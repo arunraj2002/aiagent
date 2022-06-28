@@ -123,23 +123,18 @@ class Environment:
     def __init__(self):
         self.things = []
         self.agents = []
-
     def percept(self, agent):
         """Return the percept that the agent sees at this point. (Implement this.)"""
         raise NotImplementedError
-
     def execute_action(self, agent, action):
         """Change the world to reflect this action. (Implement this.)"""
         raise NotImplementedError
-
     def default_location(self, thing):
         """Default location to place a new thing with unspecified location."""
         return None
-
     def is_done(self):
         """By default, we're done when we can't find a live agent."""
         return not any(agent.is_alive() for agent in self.agents)
-
     def step(self):
         """Run the environment for one time step. If the
         actions and exogenous changes are independent, this method will
@@ -154,14 +149,12 @@ class Environment:
                     actions.append("")
             for (agent, action) in zip(self.agents, actions):
                 self.execute_action(agent, action)
-
     def run(self, steps=1000):
         """Run the Environment for given number of time steps."""
         for step in range(steps):
             if self.is_done():
                 return
             self.step()
-
     def add_thing(self, thing, location=None):
         """Add a thing to the environment, setting its location. For
         convenience, if thing is an agent program we make a new agent
@@ -176,7 +169,6 @@ class Environment:
             if isinstance(thing, Agent):
                 thing.performance = 0
                 self.agents.append(thing)
-
     def delete_thing(self, thing):
         """Remove a thing from the environment."""
         try:
@@ -188,7 +180,7 @@ class Environment:
             print("  from list: {}".format([(thing, thing.location) for thing in self.things]))
         if thing in self.agents:
             self.agents.remove(thing)
-            
+           
 class TrivialVacuumEnvironment(Environment):
     """This environment has two locations, A and B. Each can be Dirty
     or Clean. The agent perceives its location and the location's
@@ -206,14 +198,11 @@ class TrivialVacuumEnvironment(Environment):
                        loc_G: random.choice(['Clean', 'Dirty']),
                        loc_H: random.choice(['Clean', 'Dirty']),
                        loc_I: random.choice(['Clean', 'Dirty']),}
-
     def thing_classes(self):
         return [ TableDrivenVacuumAgent]
-
     def percept(self, agent):
         """Returns the agent's location, and the location status (Dirty/Clean)."""
         return agent.location, self.status[agent.location]
-
     def execute_action(self, agent, action):
         """Change agent's location and/or location's status; track performance.
         Score 10 for each dirt cleaned; -1 for each move."""
@@ -248,7 +237,6 @@ class TrivialVacuumEnvironment(Environment):
             if self.status[agent.location]=='Dirty':
                 agent.performance+=10
             self.status[agent.location]='Clean'
-
     def default_location(self, thing):
         """Agents start in either location at random."""
         return random.choice([loc_A, loc_B, loc_C, loc_D, loc_E, loc_F, loc_G, loc_H, loc_I])
@@ -269,5 +257,4 @@ if __name__ == "__main__":
 ![Screenshot 2022-04-07 203130](https://user-images.githubusercontent.com/75235488/162230133-ff838ebc-ed93-4882-b2c0-3967723b8c09.png)
 
 ## RESULT
-
 Thus, an AI agent was developed and PEAS description is given. 
